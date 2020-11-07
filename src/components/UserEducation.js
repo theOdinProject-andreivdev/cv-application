@@ -1,3 +1,5 @@
+import UserEducationEntry from "./UserEducationEntry";
+
 const { Component } = require("react");
 
 class UserEducation extends Component {
@@ -8,9 +10,7 @@ class UserEducation extends Component {
       name: "",
       title: "",
       date: "",
-      savedName: [],
-      savedTitle: [],
-      savedDate: [],
+      entries: [],
     };
   }
 
@@ -32,25 +32,18 @@ class UserEducation extends Component {
 
   add = (e) => {
     e.preventDefault();
+    let obj = new Object();
+    obj = {
+      name: this.state.name,
+      title: this.state.title,
+      date: this.state.date,
+    };
     this.setState({
-      savedName: this.state.savedName.concat(this.state.name),
-      savedTitle: this.state.savedTitle.concat(this.state.title),
-      savedDate: this.state.savedDate.concat(this.state.date),
+      entries: this.state.entries.concat(obj),
     });
   };
 
   render() {
-    let self = this;
-    var items = this.state.savedName.map(function (item, key) {
-      return (
-        <div>
-          <div>{self.state.savedName[key]}</div>
-          <div>{self.state.savedTitle[key]}</div>
-          <div>{self.state.savedDate[key]}</div>
-        </div>
-      );
-    });
-
     return (
       <div>
         <div style={{ paddingTop: "10px" }}>Your education</div>
@@ -94,7 +87,15 @@ class UserEducation extends Component {
               marginLeft: "10px",
             }}
           >
-            {items}
+            {this.state.entries.map((entry) => {
+              return (
+                <UserEducationEntry
+                  name={this.state.name}
+                  title={this.state.title}
+                  date={this.state.date}
+                />
+              );
+            })}
           </div>
         </form>
       </div>
