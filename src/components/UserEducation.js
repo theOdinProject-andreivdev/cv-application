@@ -10,7 +10,13 @@ class UserEducation extends Component {
       name: "",
       title: "",
       date: "",
-      entries: [],
+      entries: [
+        {
+          name: "SomeUniv",
+          title: "nerdProgrammer",
+          date: "21/12/2012",
+        },
+      ],
     };
   }
 
@@ -89,11 +95,13 @@ class UserEducation extends Component {
           >
             {this.state.entries.map((entry) => {
               return (
-                <UserEducationEntry
-                  name={this.state.name}
-                  title={this.state.title}
-                  date={this.state.date}
-                />
+                <div style={{ width: "100%" }}>
+                  <UserEducationEntry
+                    name={entry.name}
+                    title={entry.title}
+                    date={entry.date}
+                  />
+                </div>
               );
             })}
           </div>

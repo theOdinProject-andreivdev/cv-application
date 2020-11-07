@@ -1,12 +1,14 @@
 const { Component } = require("react");
 
-class UserEducationEntry extends Component {
+class UserExperienceEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: this.props.name,
-      title: this.props.title,
-      date: this.props.date,
+      position: this.props.position,
+      tasks: this.props.tasks,
+      datestarted: this.props.datestarted,
+      dateended: this.props.dateended,
       visible: true,
     };
   }
@@ -22,8 +24,9 @@ class UserEducationEntry extends Component {
       return (
         <div>
           <div class="float-left">
-            Graduated {this.state.title} at {this.state.name} in{" "}
-            {this.state.date}
+            Worked at {this.state.name} as {this.state.position} doing{" "}
+            {this.state.tasks} between {this.state.datestarted} and{" "}
+            {this.state.dateended}
           </div>
           <button
             onClick={this.delete}
@@ -34,10 +37,8 @@ class UserEducationEntry extends Component {
           </button>
         </div>
       );
-    } else {
-      return <div></div>;
-    }
+    } else return <div></div>;
   }
 }
 
-export default UserEducationEntry;
+export default UserExperienceEntry;
