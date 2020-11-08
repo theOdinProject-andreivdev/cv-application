@@ -1,44 +1,34 @@
-const { Component } = require("react");
+const { useState } = require("react");
 
-class UserExperienceEntry extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      position: this.props.position,
-      tasks: this.props.tasks,
-      datestarted: this.props.datestarted,
-      dateended: this.props.dateended,
-      visible: true,
-    };
-  }
+const UserExperienceEntry = (props) => {
+  const [name, changeName] = useState(props.name);
+  const [position, changePosition] = useState(props.position);
+  const [tasks, changeTasks] = useState(props.tasks);
+  const [datestarted, changeDateStarted] = useState(props.datestarted);
+  const [dateended, changeDateEnded] = useState(props.dateended);
+  const [visible, changeVisible] = useState(true);
 
-  delete = (e) => {
-    this.setState({
-      visible: false,
-    });
+  const deleteEntry = () => {
+    changeVisible(false);
   };
 
-  render() {
-    if (this.state.visible) {
-      return (
-        <div>
-          <div class="float-left">
-            Worked at {this.state.name} as {this.state.position} doing{" "}
-            {this.state.tasks} between {this.state.datestarted} and{" "}
-            {this.state.dateended}
-          </div>
-          <button
-            onClick={this.delete}
-            type="button"
-            class="btn btn-danger float-right mr-3 mt-1"
-          >
-            Delete
-          </button>
+  if (visible) {
+    return (
+      <div>
+        <div class="float-left">
+          Worked at {name} as {position} doing {tasks} between {datestarted} and{" "}
+          {dateended}
         </div>
-      );
-    } else return <div></div>;
-  }
-}
+        <button
+          onClick={deleteEntry}
+          type="button"
+          class="btn btn-danger float-right mr-3 mt-1"
+        >
+          Delete
+        </button>
+      </div>
+    );
+  } else return <div></div>;
+};
 
 export default UserExperienceEntry;

@@ -1,43 +1,31 @@
-const { Component } = require("react");
+const { useState } = require("react");
 
-class UserEducationEntry extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      title: this.props.title,
-      date: this.props.date,
-      visible: true,
-    };
-  }
+const UserEducationEntry = (props) => {
+  const [name, changeName] = useState(props.name);
+  const [title, changeTitle] = useState(props.title);
+  const [date, changeDate] = useState(props.date);
+  const [visible, changeVisible] = useState(true);
 
-  delete = (e) => {
-    this.setState({
-      visible: false,
-    });
+  const deleteEntry = (e) => {
+    changeVisible(false);
   };
-
-  render() {
-    if (this.state.visible) {
-      return (
-        <div>
-          <div class="float-left">
-            Graduated {this.state.title} at {this.state.name} in{" "}
-            {this.state.date}
-          </div>
-          <button
-            onClick={this.delete}
-            type="button"
-            class="btn btn-danger float-right mr-3 mt-1"
-          >
-            Delete
-          </button>
+  if (visible) {
+    return (
+      <div>
+        <div class="float-left">
+          Graduated {title} at {name} in {date}
         </div>
-      );
-    } else {
-      return <div></div>;
-    }
+        <button
+          onClick={deleteEntry}
+          type="button"
+          class="btn btn-danger float-right mr-3 mt-1"
+        >
+          Delete
+        </button>
+      </div>
+    );
   }
-}
+  return <div></div>;
+};
 
 export default UserEducationEntry;
